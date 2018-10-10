@@ -14,11 +14,18 @@ const { GraphQLServer } = require('graphql-yoga')
 //Naming matters : Query and Mutation are reserved types.  These will be turned into
 //The parts of our API we can interact with
 const typeDefs = `
-
+type Query {
+  welcome: String!
+}
 `
 
-const resolvers = {
 
+//This object needs to match the structure of our typeDefinition Queries and Mutations
+//All values should be functions and what they return is like doing a res.send...almost
+const resolvers = {
+    Query: {
+        welcome: () => `Hacker News clone begins.`,
+    },
 }
 
 //Our server is looking for our typeDefs and our Resolvers
