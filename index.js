@@ -16,6 +16,12 @@ const { GraphQLServer } = require('graphql-yoga')
 const typeDefs = `
 type Query {
   welcome: String!
+  links: [Link!]!
+}
+type Link {
+  id: ID!
+  description: String!
+  url: String!
 }
 `
 
