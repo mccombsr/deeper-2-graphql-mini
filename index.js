@@ -19,6 +19,10 @@ type Query {
   links: [Link!]!
 }
 
+type Mutation {
+  addLink(url: String!, description: String!): Link!
+}
+
 type Link {
   id: ID!
   description: String!
@@ -48,6 +52,17 @@ const resolvers = {
     Query: {
         welcome: () => `Hacker News clone begins.`,
         links: () => articleLinks,
+    },
+    Mutation: {
+        addLink: (root, args) => { //root is for context, args is for params coming in
+            const link = {
+                id: `link-${idCount}`,
+                description: args.description,
+                url: args.url,
+            }
+            articleLinks.push(link)
+            return link //like res.send
+        }
     },
 }
 
