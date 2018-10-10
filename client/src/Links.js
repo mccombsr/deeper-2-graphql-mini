@@ -1,8 +1,22 @@
 
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
+import axios from 'axios';
 
 class Links extends Component {
+
+    componentWillMount(){
+        axios({
+                method:"POST",
+                url: "http://localhost:4000/",
+                data:{
+                    query: LINKS_QUERY
+                }
+        }).then((response)=> {
+            console.log(response.data)
+        })
+    }
+
     render() {
         return (
             <div>
