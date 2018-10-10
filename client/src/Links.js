@@ -4,23 +4,40 @@ import gql from 'graphql-tag'
 import axios from 'axios';
 
 class Links extends Component {
+    constructor() {
+        super();
 
-    componentWillMount(){
+        this.state = {
+            loading: true
+        }
+    }
+    componentWillMount() {
         axios({
-                method:"POST",
-                url: "http://localhost:4000/",
-                data:{
-                    query: LINKS_QUERY
-                }
-        }).then((response)=> {
-            console.log(response.data)
+            method: "POST",
+            url: "http://localhost:4000/",
+            data: {
+                query: LINKS_QUERY
+            }
+        }).then((response) => {
+            this.setState({
+                loading: false,
+                response: response.data.data
+            })
         })
     }
 
     render() {
         return (
             <div>
-                Links will go here
+                {
+                    this.state.loading ?
+                        "LOADING" :
+                        (<div>
+                            {this.state.response.links.map((link) => {
+                                return <li>{link.title}</li>
+                            })}
+                        </div>)
+                }
             </div>
         )
     }
