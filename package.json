@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mccombsr/deeper-2-graphql-mini#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "graphql-yoga": "^1.16.7"
   }
 }
