@@ -1,4 +1,4 @@
-const {GraphQLServer} = require('graphql-yogo');
+const {GraphQLServer} = require('graphql-yoga');
 
 
 //Nameing matters: Query and Mutation are resvered types.
@@ -6,13 +6,19 @@ const {GraphQLServer} = require('graphql-yogo');
 const typeDefs = `
     type Query {
         welcome: String!
+        links: [Link!]!
+    }
+    type Link {
+        id: ID!
+        description: String!
+        url: String!
     }
 `
 //This object needs to match the structure of our typeDefinition Queries and Mutations
 //All values should be functions and what they return is like doing a res.send...almost.
 const resolvers = {
     Query: {
-        welcome: ()=> `Hacker News clone begines.`,
+        welcome: ()=> `Hacker News clone begins.`,
     },
 }
 
