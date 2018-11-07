@@ -8,6 +8,11 @@ const typeDefs = `
         welcome: String!
         links: [Link!]!
     }
+
+    type Mutation {
+        addLink(url: String!, description: String!): Link!
+    }
+
     type Link {
         id: ID!
         description: String!
@@ -35,6 +40,19 @@ let idCount = articleLinks.length
 const resolvers = {
     Query: {
         welcome: ()=> `Hacker News clone begins.`,
+        links: ()=> articleLinks,
+    },
+    Mutation: {
+        addLink: (root, args)=> {//root is for context, args is for params coming in 
+            const link = {
+                id: `Link-${idCount}`,
+                description: args.description,
+                url: args.url,
+            }
+            idCount++;
+            articleLinks.push(link)
+            return link //like res.send
+        }
     },
 }
 
